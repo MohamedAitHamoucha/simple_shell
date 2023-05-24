@@ -1,6 +1,7 @@
 #include "shell.h"
+
 /**
- * _eputs - prints an input string
+ *_eputs - prints an input string
  * @str: the string to be printed
  *
  * Return: Nothing
@@ -17,6 +18,7 @@ void _eputs(char *str)
 		i++;
 	}
 }
+
 /**
  * _eputchar - writes the character c to stderr
  * @c: The character to print
@@ -28,6 +30,7 @@ int _eputchar(char c)
 {
 	static int i;
 	static char buf[WRITE_BUF_SIZE];
+
 	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
 	{
 		write(2, buf, i);
@@ -37,6 +40,7 @@ int _eputchar(char c)
 		buf[i++] = c;
 	return (1);
 }
+
 /**
  * _putfd - writes the character c to given fd
  * @c: The character to print
@@ -49,6 +53,7 @@ int _putfd(char c, int fd)
 {
 	static int i;
 	static char buf[WRITE_BUF_SIZE];
+
 	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
 	{
 		write(fd, buf, i);
@@ -58,8 +63,9 @@ int _putfd(char c, int fd)
 		buf[i++] = c;
 	return (1);
 }
+
 /**
- * _putsfd - prints an input string
+ *_putsfd - prints an input string
  * @str: the string to be printed
  * @fd: the filedescriptor to write to
  *

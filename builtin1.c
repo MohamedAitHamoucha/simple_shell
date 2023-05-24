@@ -1,4 +1,5 @@
 #include "shell.h"
+
 /**
  * _myhistory - displays the history list, one command by line, preceded
  *              with line numbers, starting at 0.
@@ -11,6 +12,7 @@ int _myhistory(info_t *info)
 	print_list(info->history);
 	return (0);
 }
+
 /**
  * unset_alias - sets alias to string
  * @info: parameter struct
@@ -22,6 +24,7 @@ int unset_alias(info_t *info, char *str)
 {
 	char *p, c;
 	int ret;
+
 	p = _strchr(str, '=');
 	if (!p)
 		return (1);
@@ -32,6 +35,7 @@ int unset_alias(info_t *info, char *str)
 	*p = c;
 	return (ret);
 }
+
 /**
  * set_alias - sets alias to string
  * @info: parameter struct
@@ -42,14 +46,17 @@ int unset_alias(info_t *info, char *str)
 int set_alias(info_t *info, char *str)
 {
 	char *p;
+
 	p = _strchr(str, '=');
 	if (!p)
 		return (1);
 	if (!*++p)
 		return (unset_alias(info, str));
+
 	unset_alias(info, str);
 	return (add_node_end(&(info->alias), str, 0) == NULL);
 }
+
 /**
  * print_alias - prints an alias string
  * @node: the alias node
@@ -59,11 +66,12 @@ int set_alias(info_t *info, char *str)
 int print_alias(list_t *node)
 {
 	char *p = NULL, *a = NULL;
+
 	if (node)
 	{
 		p = _strchr(node->str, '=');
 		for (a = node->str; a <= p; a++)
-		_putchar(*a);
+			_putchar(*a);
 		_putchar('\'');
 		_puts(p + 1);
 		_puts("'\n");
@@ -71,6 +79,7 @@ int print_alias(list_t *node)
 	}
 	return (1);
 }
+
 /**
  * _myalias - mimics the alias builtin (man alias)
  * @info: Structure containing potential arguments. Used to maintain
@@ -101,5 +110,6 @@ int _myalias(info_t *info)
 		else
 			print_alias(node_starts_with(info->alias, info->argv[i], '='));
 	}
+
 	return (0);
 }
